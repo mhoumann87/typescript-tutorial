@@ -95,4 +95,47 @@ const student1: Student = {
     }
 }
 
+/**
+ * Arrays
+ */
+// When we are working with arrays, we have to "mention" that it is an array we are dealing with
+const ages: number[] = [23, 42];
+
+type Kid = {
+    name: string;
+    age: number;
+    inSchool:  boolean;
+}
+
+const kid1: Kid = {
+    name: 'Billy',
+    age: 3,
+    inSchool: false,
+}
+
+const kid2: Kid = {
+    name: 'Tina',
+    age: 7,
+    inSchool: true,
+}
+
+// Another way we can set the array of types
+const kids: Array<Kid> = [kid1, kid2];
+
+/**
+* literal types
+*/
+//If we make a 'let' function, typescript infers that the type will be a string
+let myName1 = 'Bob';
+// but if we make a constant variable, the type will be literal with the value you provide
+const myName8 = 'Lauren';
+// that make sense because we are not allowed to change the value of a constant
+
+/**
+ * Union types
+ */
+
+// Literal types are mostly used in union types
+type UserRole = "guest" | "member" | "admin";
+let userRole: UserRole = 'member';
 
