@@ -38,6 +38,28 @@ const orderQueue: Order[] = [];
 const addNewPizza = (pizzaObj: Pizza) => menu.push(pizzaObj);
 
 /**
+ * Challenge: Write a new utility function 'getPizzaDetail. It will take a parameter
+ * called 'identifier', but there's a twist: We want this identifier to be allowed to
+ * be either the string name of the pizza (e.g. "Pepperoni"), OR to be the number ID
+ * of the pizza (e.g. 21)
+ */
+
+const getPizzaDetail = (identifier: string | number | undefined) => {
+    /**
+     * Challenge: Write the code to check if the parameter is a string or a number and use the
+     */
+
+    if (typeof identifier === 'string') {
+        return menu.find(pizza => pizza.name.toLowerCase() === identifier.toString());
+    } else if (typeof identifier === 'number')  {
+        return menu.find(pizza => pizza.id === identifier);
+    } else {
+        throw new TypeError(`Parameter 'identifier' must be either a 'string' or a 'number'`);
+    }
+
+}
+
+/**
  * Write another utility function, "placeOrder", that takes a
  * pizza name and:
  * 1. finds that pizza in the menu
