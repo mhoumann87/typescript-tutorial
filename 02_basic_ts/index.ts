@@ -137,5 +137,29 @@ const myName8 = 'Lauren';
 
 // Literal types are mostly used in union types
 type UserRole = "guest" | "member" | "admin";
-let userRole: UserRole = 'member';
+// let userRole: UserRole = 'member';
+// We create a type for a user
+type User = {
+    username: string;
+    role: UserRole;
+}
+
+const users: User[] = [
+    {username: 'John Doe', role: "member"},
+    {username: 'Jane Doe', role: "admin"},
+    {username: 'guest-user', role: "guest"},
+];
+
+// Typescript can in this example infer that the return rype will be 'User', but it is best,
+// if we specify the return type. It is helpfull if we or another developer later on will
+// refactor the code
+
+const fetchUserDetails = (username: string): User => {
+    const user = users.find(user => user.username === username);
+    if (!user) {
+        throw new TypeError('User not found');
+    }
+    return user;
+}
+
 
