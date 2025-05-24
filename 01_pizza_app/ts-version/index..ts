@@ -44,7 +44,7 @@ const addNewPizza = (pizzaObj: Pizza) => menu.push(pizzaObj);
  * of the pizza (e.g. 21)
  */
 
-const getPizzaDetail = (identifier: string | number | undefined) => {
+const getPizzaDetail = (identifier: string | number | undefined): Pizza | undefined => {
     /**
      * Challenge: Write the code to check if the parameter is a string or a number and use the
      */
@@ -69,7 +69,7 @@ const getPizzaDetail = (identifier: string | number | undefined) => {
  * 4. returns the new order object in case we need it later
  */
 
-const placeOrder = (pizzaName: string) => {
+const placeOrder = (pizzaName: string): Order | undefined => {
     const selectedPizza = menu.find(pizzaObj => pizzaObj.name === pizzaName);
     // Check to see if we have a 'selectedPizza' to prevent errors
     if (!selectedPizza) {
@@ -95,7 +95,7 @@ const placeOrder = (pizzaName: string) => {
  * managed for us by a database.
  */
 
-const completeOrder = (orderId: number) => {
+const completeOrder = (orderId: number): Order | undefined => {
     const selectedOrder = orderQueue.find(pizzaObj => pizzaObj.id === orderId);
     if (!selectedOrder) {
         console.error(`${orderId} do not exist`);
