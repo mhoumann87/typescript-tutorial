@@ -162,4 +162,19 @@ const fetchUserDetails = (username: string): User => {
     return user;
 }
 
+// Like in a many other languages, a function that don't return  anythis is a void function
+const add2 = (): void => console.log(2 + 2);
+
+// Using the 'any' type is generally a bad idea, because you turn off type checking for that element
+let value = 1;
+// And we get an error if we try to change the value to another type
+
+// Here typescript infers that the type is number, but if we give it the 'any' type, you
+// can change it to a boolean or a string
+let value2: any = 1;
+value2 = 'cheese';
+value2 = false;
+// Here TS is working just like javascript
+
+
 
