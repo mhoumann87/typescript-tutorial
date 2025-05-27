@@ -176,5 +176,34 @@ value2 = 'cheese';
 value2 = false;
 // Here TS is working just like javascript
 
+// Instead of the 'any' type, in case we need to figure the type out, e.g. if we convert
+// a JS project to TS
+let number10: unknown = 3;
+number10 = 'jack';
+// and it works the same way as the 'any' type
+
+
+/**
+ * Utility types and partials
+ */
+
+type Pupil = {
+    id: number;
+    name: string;
+    grade: number;
+}
+
+let nextPupilId: number= 1;
+
+const pupils: Pupil[] = [
+    {id: nextPupilId++, name: 'Brian', grade: 3},
+    {id: nextPupilId++, name: 'Inga', grade: 1},
+    {id: nextPupilId++, name: 'Tina', grade: 5},
+    {id: nextPupilId++, name: 'Bo', grade: 5},
+];
+
+const updatePupil = (id: number, updates: any): void => {
+    pupils.find(pupilId:  => pupild === id);
+}
 
 
