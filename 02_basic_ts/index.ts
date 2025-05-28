@@ -203,7 +203,7 @@ const pupils: Pupil[] = [
 ];
 
 const updatePupil = (id: number, updates: any): void => {
-    pupils.find(pupilId:  => pupild === id);
+    pupils.find(pupil: Pupil number => pupil.id === id);
 }
 
 
