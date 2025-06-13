@@ -51,7 +51,7 @@ const person: Person = {
 const person2: Person = {
     name: 'Jill',
     age: 66,
-    isStudent: false;
+    isStudent: false,
 }
 
 // We can also use nested properties in types
@@ -189,21 +189,69 @@ number10 = 'jack';
 
 type Pupil = {
     id: number;
-    name: string;
+    pupilName: string;
     grade: number;
 }
 
 let nextPupilId: number= 1;
 
 const pupils: Pupil[] = [
-    {id: nextPupilId++, name: 'Brian', grade: 3},
-    {id: nextPupilId++, name: 'Inga', grade: 1},
-    {id: nextPupilId++, name: 'Tina', grade: 5},
-    {id: nextPupilId++, name: 'Bo', grade: 5},
+    {id: nextPupilId++, pupilName: 'Brian', grade: 3},
+    {id: nextPupilId++, pupilName: 'Inga', grade: 1},
+    {id: nextPupilId++, pupilName: 'Tina', grade: 5},
+    {id: nextPupilId++, pupilName: 'Bo', grade: 5},
 ];
 
-const updatePupil = (id: number, updates: any): void => {
-    pupils.find(pupil: Pupil number => pupil.id === id);
+// instead of using the any type for the updates we provide we can make a type
+// with optional keys for the updates. It is not sure which values that the user
+// would like to update, so we can't use the Pupil type for this
+
+// The problem is, that if we have a lot of element in our type it will take a long time
+// to make our UpdatePupil type
+/* type UpdatePupil = {
+    id?:number;
+    pupilName?: string;
+    grade?: number;
+} */
+// Instead we can use a partial type like this
+type UpdatePupil = Partial<Pupil>;
+// It does the same that we did higher up in the code, now commented out
+
+const updatePupil = (id: number, updates: UpdatePupil): void => {
+    const foundPupil = pupils.find(pupil => pupil.id === id);
+    if (!foundPupil) {
+        throw new Error(`Pupil ${id} not found`);
+    }
+    // Using ´Object.assign()´ to update the pupil
+    Object.assign(foundPupil, updates);
 }
+
+// Add new pupil function
+// Here we have another problem, we need to add a new Pupil type, but we use a set number
+// for the `id`, so we can't use the Pupil type, and we need to have 'pupilName' and 'grade'
+// as the correct types, so we can't use the UpdatePupil type either.
+// We need to make a new type for this case.
+// We can't use the Partial here because then all is optional and we do need some info
+// so we can use Omit type, it takes in a type AND a string (or a union of strings)
+// Here we just use this type one time, so we can do it in the function. We use
+// `Omit< the type we want to use, "the keys we want to omit">`
+const addNewPupil = (newPupil: Omit<Pupil, "id">): Pupil => {
+    // Create a new variable called pupil and add an `id` property to it
+    // and spread in all the properties of the ´newPupil´ object.
+    const pupil: Pupil = {id: nextPupilId++, ...newPupil};
+    // Push the pupil to the pupils array
+    pupils.push(pupil);
+    return pupil;
+}
+
+updatePupil(1, {pupilName: 'Bo'});
+updatePupil(2, {grade: 8});
+updatePupil(4, {grade: 7});
+// And now we ste sure that we get the value types for our updates
+
+// Now we can sdd a new pupil
+addNewPupil({pupilName: 'Anders', grade: 1})
+
+console.log(pupils);
 
 

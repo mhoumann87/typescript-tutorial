@@ -37,9 +37,12 @@ const orderQueue: Order[] = [];
  * pizza object and adds it to the menu;
  */
 
-const addNewPizza = (pizzaObj: Pizza): void => {
-    pizzaObj.id = nextPizzaId++;
-    menu.push(pizzaObj);
+// Challenge: Add Omit type to add new pizza
+const addNewPizza = (pizzaObj: Omit<Pizza, "id">): Pizza => {
+    const newPizza: Pizza = {id: nextPizzaId++,
+        ...pizzaObj};
+    menu.push(newPizza);
+    return newPizza;
     }
 
 /**
@@ -120,4 +123,6 @@ completeOrder(1);
 console.log('Menu', menu);
 console.log('Cash in register',cashInRegister);
 console.log('Order Queue: ', orderQueue);
+
+console.log(getPizzaDetail(1));
 
